@@ -3,6 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#060608">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ECHO ADMIN">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="icon-192.png">
 <title>ECHO ADMIN</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -99,7 +107,8 @@ canvas{display:block;margin:0 auto 14px;max-width:100%}input[type=search]{flex:1
 <section id="security"><h2>Security controls</h2><p class="sub">Private access and protection for Echo’s original entity code.</p>
 <div class="row"><div><strong>Lock original entity code</strong><p>Makes the editor read-only until you unlock it.</p></div><button class="sw" id="lock" role="switch" aria-checked="false" aria-label="Lock original entity code"></button></div>
 <div class="row"><div><strong>Require passphrase on sign-in</strong><p>Ask for your passphrase each time this portal opens.</p></div><button class="sw" id="pass" role="switch" aria-checked="true" aria-label="Require passphrase"></button></div>
-<div class="row"><div><strong>Access key</strong><p>Shown masked. Only the owner can rotate it.</p></div><code>••••-••••-E7C0</code></div></section>
+<div class="row"><div><strong>Access key</strong><p>Shown masked. Only the owner can rotate it.</p></div><code>••••-••••-E7C0</code></div>
+<div class="row"><div><strong>Reset saved data</strong><p>Clears saved revisions and echo memory on this device.</p></div><button class="btn" id="reset">Reset</button></div></section>
 </div>
 <div class="foot">Fan-made fictional portal for the original character Echo. Not affiliated with Mojang or Microsoft.</div>
 </div>
@@ -137,11 +146,17 @@ if(pr>=0&&pr<=1){cx.strokeStyle=a;cx.globalAlpha=1-pr;cx.lineWidth=2;cx.beginPat
 blips.forEach(function(b){var al=Math.max(.3,1-(now-b.t)/9000),x=h+Math.sin(b.a)*b.d*(h-2),y=h-Math.cos(b.a)*b.d*(h-2);cx.globalAlpha=al;cx.fillStyle=s;cx.beginPath();cx.arc(x,y,5,0,6.283);cx.fill();cx.fillStyle=a;cx.textAlign=x>h?"right":"left";cx.fillText(b.n,x+(x>h?-9:9),y+4);cx.globalAlpha=1});
 cx.fillStyle=a;cx.beginPath();cx.arc(h,h,5,0,6.283);cx.fill()}
 $("ping").onclick=function(){if(pr>=0)return;var bl=tg.map(function(t){var a=(t[1]+Math.random()*.5-.25+6.283)%6.283;return {n:t[0],a:a,d:t[2],w:cap(dirOf(a))+", "+Math.round(t[2]*20)+" blocks",r:0}});blips=[];$("ping").disabled=true;var t0=performance.now();
-function done(){pr=-1;$("ping").disabled=false;$("pinglist").textContent=blips.map(function(b){return b.n+": "+b.w}).join("\n");var ts=new Date().toLocaleTimeString();blips.forEach(function(b){mem.unshift({n:b.n,w:b.w,t:ts})});mem=mem.slice(0,40);drawMem();draw(performance.now())}
+function done(){pr=-1;$("ping").disabled=false;$("pinglist").textContent=blips.map(function(b){return b.n+": "+b.w}).join("\n");var ts=new Date().toLocaleTimeString();blips.forEach(function(b){mem.unshift({n:b.n,w:b.w,t:ts})});mem=mem.slice(0,40);drawMem();persist();draw(performance.now())}
 function step(now){pr=still?1:(now-t0)/1600;bl.forEach(function(b){if(!b.r&&pr>=b.d){b.r=1;b.t=now;blips.push(b)}});if(pr>=1){bl.forEach(function(b){if(!b.r){b.r=1;b.t=now;blips.push(b)}});done();return}draw(now);requestAnimationFrame(step)}
 requestAnimationFrame(step)};
 function drawMem(){var q=$("memq").value.toLowerCase(),box=$("mem");box.innerHTML="";var list=mem.filter(function(m){return (m.n+" "+m.w).toLowerCase().indexOf(q)>-1});list.forEach(function(m){var d=document.createElement("div");d.className="ver";d.innerHTML='<div><strong>'+m.n+'</strong><small>'+m.w+', '+m.t+'</small></div><span class="tag">Remembered</span>';box.appendChild(d)});if(!list.length)box.innerHTML='<p class="note">Nothing matches. Send a ping to add new sounds.</p>';$("memn").textContent=list.length+" of "+mem.length+" shown"}
 $("memq").oninput=drawMem;window.onresize=function(){if($("echolocation").classList.contains("on"))initRadar()};
+var KEY="echo-admin-state",noSave=false;
+function persist(){if(noSave)return;try{localStorage.setItem(KEY,JSON.stringify({vers:vers,cur:cur,imm:imm,locked:locked,mem:mem,last:$("lastrev").textContent,code:$("code").value}))}catch(e){}}
+(function(){try{var s=JSON.parse(localStorage.getItem(KEY)||"null");if(!s)return;vers=s.vers;cur=s.cur;mem=s.mem;$("code").value=s.code;$("lastrev").textContent=s.last;setImm(s.imm,true);if(s.locked){locked=true;$("lock").setAttribute("aria-checked","true");$("code").readOnly=true;$("save").disabled=true}}catch(e){}})();
+document.addEventListener("click",function(){setTimeout(persist,0)});
+$("code").addEventListener("input",persist);
+$("reset").onclick=function(){if(confirm("Clear all saved revisions and echo memory on this device?")){noSave=true;try{localStorage.removeItem(KEY)}catch(e){}location.reload()}};
 drawMem();
 drawV();
 </script>
