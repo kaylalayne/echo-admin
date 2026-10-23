@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ECHO ADMIN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eceef3;--panel:#fff;--line:#d3d7e0;--text:#14151c;--mute:#5d6272;--silver:#4a5062;--accent:#6a4df0;--accent2:#1d7fe0;--ok:#16905a;--warn:#b5651d;--code:#f4f5f9;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#060608;--panel:#0f1016;--line:#23242f;--text:#e6e8ee;--mute:#8b90a0;--silver:#c9ced8;--accent:#9a82ff;--accent2:#58aaff;--ok:#5fd6a0;--warn:#e8a15c;--code:#0a0b10}}
+:root[data-theme="dark"]{--bg:#060608;--panel:#0f1016;--line:#23242f;--text:#e6e8ee;--mute:#8b90a0;--silver:#c9ced8;--accent:#9a82ff;--accent2:#58aaff;--ok:#5fd6a0;--warn:#e8a15c;--code:#0a0b10}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--text);font:400 15px/1.55 Sora,system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}
+.shell{max-width:1040px;margin:0 auto;padding:20px 16px 48px;display:grid;gap:18px;grid-template-columns:200px 1fr}
+header{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+h1{margin:0;font-size:22px;font-weight:300;letter-spacing:.32em;color:var(--silver)}
+h1 b{font-weight:600;color:var(--text)}
+.pill{font-size:12px;border:1px solid var(--line);border-radius:99px;padding:4px 12px;color:var(--mute)}
+.pill i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ok);margin-right:8px}
+nav{display:flex;flex-direction:column;gap:4px}
+nav button{font:inherit;text-align:left;background:none;border:0;border-left:2px solid var(--line);color:var(--mute);padding:9px 12px;cursor:pointer}
+nav button[aria-selected="true"]{color:var(--text);border-left-color:var(--accent);background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 14%,transparent),transparent)}
+nav button:focus-visible,.btn:focus-visible,.sw:focus-visible,textarea:focus-visible{outline:2px solid var(--accent2);outline-offset:2px}
+section{display:none;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:22px}
+section.on{display:block}
+h2{margin:0 0 4px;font-size:18px;font-weight:600}
+.sub{color:var(--mute);margin:0 0 18px;max-width:60ch}
+.hero{display:flex;gap:28px;align-items:center;flex-wrap:wrap;margin-bottom:22px}
+.core{position:relative;width:150px;height:150px;flex:none;display:grid;place-items:center}
+.core span{position:absolute;inset:0;border-radius:50%;border:1px solid var(--accent);opacity:0}
+.imm .core span{animation:ring 3.6s ease-out infinite}
+.imm .core span:nth-child(2){animation-delay:1.2s}.imm .core span:nth-child(3){animation-delay:2.4s}
+@keyframes ring{0%{transform:scale(.45);opacity:.8}100%{transform:scale(1.15);opacity:0}}
+.core em{position:relative;width:64px;height:64px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,var(--silver) 55%,var(--accent) 120%);box-shadow:0 0 28px color-mix(in srgb,var(--accent) 55%,transparent);transition:filter .3s,box-shadow .3s}
+body:not(.imm) .core em{filter:grayscale(1) brightness(.55);box-shadow:none}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;flex:1;min-width:240px}
+.stat{border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.stat small{display:block;color:var(--mute);font-size:12px}
+.stat strong{font-weight:600}
+.row{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:14px 0;border-top:1px solid var(--line)}
+.row:first-of-type{border-top:0}
+.row p{margin:2px 0 0;color:var(--mute);font-size:13px;max-width:52ch}
+.sw{flex:none;width:52px;height:30px;border-radius:99px;border:1px solid var(--line);background:var(--code);position:relative;cursor:pointer;padding:0;transition:background .25s}
+.sw::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:var(--mute);transition:transform .25s,background .25s}
+.sw[aria-checked="true"]{background:color-mix(in srgb,var(--accent) 35%,var(--code));border-color:var(--accent)}
+.sw[aria-checked="true"]::after{transform:translateX(22px);background:var(--silver)}
+.btn{font:inherit;font-size:13px;background:none;color:var(--text);border:1px solid var(--line);border-radius:6px;padding:8px 14px;cursor:pointer}
+.btn:hover{border-color:var(--accent)}.btn.pri{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+textarea{width:100%;min-height:230px;background:var(--code);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:14px;font:400 13px/1.6 "IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;resize:vertical}
+.bar{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;align-items:center}
+.note{color:var(--mute);font-size:13px}
+.log{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:14px;margin-top:12px;min-height:120px;font:400 13px/1.7 "IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;overflow-x:auto;white-space:pre}
+.ver{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--line)}
+.ver:first-child{border-top:0}.ver small{color:var(--mute);display:block}
+.ver.cur strong::after{content:" (current)";color:var(--ok);font-weight:400;font-size:13px}
+.ok{color:var(--ok)}.warn{color:var(--warn)}.h3{margin-top:26px;font-size:16px}.tag{flex:none;font-size:12px;border:1px solid var(--line);border-radius:99px;padding:3px 10px;color:var(--silver)}
+canvas{display:block;margin:0 auto 14px;max-width:100%}input[type=search]{flex:1;min-width:180px;font:inherit;font-size:13px;background:var(--code);color:var(--text);border:1px solid var(--line);border-radius:6px;padding:8px 12px}input[type=search]:focus-visible{outline:2px solid var(--accent2);outline-offset:2px}.foot{grid-column:1/-1;color:var(--mute);font-size:12px;text-align:center;margin-top:6px}
+@media (max-width:760px){.shell{grid-template-columns:1fr}nav{flex-direction:row;overflow-x:auto;gap:2px;border-bottom:1px solid var(--line)}nav button{white-space:nowrap;border-left:0;border-bottom:2px solid transparent}nav button[aria-selected="true"]{border-bottom-color:var(--accent);background:none}}
+@media (prefers-reduced-motion:reduce){.core span{animation:none!important}.sw::after,.sw{transition:none}}
+</style>
+</head>
+<body class="imm">
+<div class="shell">
+<header><h1><b>ECHO</b> ADMIN</h1><span class="pill"><i></i>Private session, owner verified</span></header>
+<nav role="tablist" aria-label="Portal sections" id="nav"></nav>
+<div>
+<section id="overview" class="on"><div class="hero"><div class="core" aria-hidden="true"><span></span><span></span><span></span><em></em></div>
+<div class="stats"><div class="stat"><small>Entity</small><strong>Echo</strong></div><div class="stat"><small>Status</small><strong id="st">Immortal</strong></div><div class="stat"><small>Respawn</small><strong>Assigned bed</strong></div><div class="stat"><small>Scope</small><strong>Entity code only</strong></div></div></div>
+<h2>Entity overview</h2><p class="sub">Echo’s current configuration and active abilities. This portal manages the Echo entity and nothing else in the game.</p>
+<div class="row"><div><strong>Active abilities</strong><p id="abl">Immortality (on), 6 permanent abilities</p></div></div>
+<div class="row"><div><strong>Last revision</strong><p id="lastrev">v1.2, respawn at assigned bed</p></div></div></section>
+
+<section id="abilities"><h2>Ability manager</h2><p class="sub">Turn abilities on or off for the Echo entity. Changes are written to the code editor and logged in version history.</p>
+<div class="row"><div><strong>Immortality</strong><p>On by default. Turn it off and Echo can die like any player, then respawn at her assigned bed. Death is never permanent.</p></div><button class="sw" id="imm" role="switch" aria-checked="true" aria-label="Immortality"></button></div><h2 class="h3">Permanent abilities</h2><p class="sub">Part of Echo’s original code. These are always on and have no switch.</p><div id="perm"></div></section>
+
+<section id="editor"><h2>Code editor</h2><p class="sub">Edit and extend the Echo entity’s own code. Changes only take effect through a compatible integration.</p>
+<textarea id="code" spellcheck="false" aria-label="Entity code"></textarea>
+<div class="bar"><button class="btn pri" id="save">Save revision</button><span class="note" id="edmsg"></span></div></section>
+
+<section id="history"><h2>Version history</h2><p class="sub">Every saved revision, with restore points.</p><div id="vlist"></div></section>
+
+<section id="echolocation"><h2>Echolocation</h2><p class="sub">Send out a ping and see what comes back. Everything the ping finds is saved to Echo memory.</p><canvas id="radar" role="img" aria-label="Radar view of sounds around Echo"></canvas><div class="bar" style="justify-content:center;margin-top:0"><button class="btn pri" id="ping">Send ping</button><span class="note">Range: 20 blocks</span></div><div id="pinglist" class="log" aria-live="polite">No ping sent yet.</div></section>
+<section id="memory"><h2>Echo memory</h2><p class="sub">Sounds Echo has heard, where they came from, and what made them.</p><div class="bar" style="margin:0 0 8px"><input type="search" id="memq" placeholder="Search sounds or directions" aria-label="Search echo memory"><span class="note" id="memn"></span></div><div id="mem"></div></section>
+<section id="sandbox"><h2>Testing sandbox</h2><p class="sub">Run the current code in a closed test environment before using it in the game.</p>
+<div class="bar" style="margin-top:0"><button class="btn pri" id="run">Run damage test</button><button class="btn" id="clr">Clear output</button></div>
+<div class="log" id="log" aria-live="polite">Ready. Nothing has been run yet.</div></section>
+
+<section id="integration"><h2>Integration status</h2><p class="sub">Whether the Echo entity is connected to a compatible Minecraft environment.</p>
+<div class="row"><div><strong>Compatible environment</strong></div><span class="ok">Detected</span></div>
+<div class="row"><div><strong>Entity hook</strong></div><span class="ok">Registered</span></div>
+<div class="row"><div><strong>Scope check</strong><p>Only the Echo entity and its agreed code are reachable.</p></div><span class="ok">Entity only</span></div>
+<div class="row"><div><strong>Global game code</strong><p>Not covered by Echo’s agreement.</p></div><span class="warn">No access</span></div>
+<div class="bar"><button class="btn" id="chk">Check again</button><span class="note" id="chkmsg"></span></div></section>
+
+<section id="security"><h2>Security controls</h2><p class="sub">Private access and protection for Echo’s original entity code.</p>
+<div class="row"><div><strong>Lock original entity code</strong><p>Makes the editor read-only until you unlock it.</p></div><button class="sw" id="lock" role="switch" aria-checked="false" aria-label="Lock original entity code"></button></div>
+<div class="row"><div><strong>Require passphrase on sign-in</strong><p>Ask for your passphrase each time this portal opens.</p></div><button class="sw" id="pass" role="switch" aria-checked="true" aria-label="Require passphrase"></button></div>
+<div class="row"><div><strong>Access key</strong><p>Shown masked. Only the owner can rotate it.</p></div><code>••••-••••-E7C0</code></div></section>
+</div>
+<div class="foot">Fan-made fictional portal for the original character Echo. Not affiliated with Mojang or Microsoft.</div>
+</div>
+<script>
+var $=function(i){return document.getElementById(i)};
+var tabs=[["overview","Overview"],["abilities","Abilities"],["echolocation","Echolocation"],["memory","Echo memory"],["editor","Code editor"],["history","Version history"],["sandbox","Sandbox"],["integration","Integration"],["security","Security"]];
+var imm=true,locked=false;
+function tpl(i){return 'entity Echo {\n  owner: "Echo"\n  scope: "entity_only"\n  permanent {\n    echolocation\n    vibration_sense\n    hyperacute_hearing\n    acoustic_recognition\n    directional_awareness\n    echo_memory\n  }\n  abilities {\n    immortality: '+i+'\n  }\n  respawn { point: "assigned_bed" }\n}'}
+var vers=[{n:"v1.0",d:"Original entity, handed over by Markus",c:tpl(true).replace(/  abilities[\s\S]*?  }\n/,"").replace('  respawn { point: "assigned_bed" }\n',"")},{n:"v1.1",d:"Immortality system added",c:tpl(true).replace('  respawn { point: "assigned_bed" }\n',"")},{n:"v1.2",d:"Respawn at assigned bed",c:tpl(true)}];
+var cur=2;
+var nav=$("nav");
+tabs.forEach(function(t,i){var b=document.createElement("button");b.textContent=t[1];b.setAttribute("role","tab");b.setAttribute("aria-selected",i==0);b.onclick=function(){show(t[0])};b.dataset.t=t[0];nav.appendChild(b)});
+function show(id){document.querySelectorAll("section").forEach(function(s){s.classList.toggle("on",s.id==id)});nav.querySelectorAll("button").forEach(function(b){b.setAttribute("aria-selected",b.dataset.t==id)});if(id=="echolocation")initRadar()}
+$("code").value=tpl(true);
+function drawV(){$("vlist").innerHTML="";vers.slice().reverse().forEach(function(v,k){var i=vers.length-1-k;var d=document.createElement("div");d.className="ver"+(i==cur?" cur":"");d.innerHTML='<div><strong>'+v.n+'</strong><small>'+v.d+'</small></div>';var b=document.createElement("button");b.className="btn";b.textContent="Restore";b.disabled=locked||i==cur;b.onclick=function(){cur=i;$("code").value=v.c;var m=/immortality: (true|false)/.exec(v.c);if(m)setImm(m[1]=="true",true);$("lastrev").textContent=v.n+", "+v.d;$("edmsg").textContent="Restored "+v.n+".";drawV()};d.appendChild(b);$("vlist").appendChild(d)})}
+function setImm(on,quiet){imm=on;$("imm").setAttribute("aria-checked",on);document.body.classList.toggle("imm",on);$("st").textContent=on?"Immortal":"Mortal";$("abl").textContent=(on?"Immortality (on), ":"")+"6 permanent abilities";$("code").value=$("code").value.replace(/immortality: (true|false)/,"immortality: "+on);if(!quiet)$("edmsg").textContent="Immortality turned "+(on?"on":"off")+". Save a revision to keep this change."}
+$("imm").onclick=function(){if(locked){$("edmsg").textContent="Code is locked. Unlock it in Security controls first.";show("security");return}setImm(!imm)};
+$("save").onclick=function(){if(locked)return;var n="v1."+vers.length;var d=imm?"Saved with immortality on":"Saved with immortality off";vers.push({n:n,d:d,c:$("code").value});cur=vers.length-1;$("lastrev").textContent=n+", "+d;$("edmsg").textContent="Saved "+n+".";drawV()};
+$("lock").onclick=function(){locked=!locked;this.setAttribute("aria-checked",locked);$("code").readOnly=locked;$("save").disabled=locked;$("edmsg").textContent=locked?"Editor is read-only.":"Editor unlocked.";drawV()};
+$("pass").onclick=function(){this.setAttribute("aria-checked",this.getAttribute("aria-checked")!="true")};
+$("run").onclick=function(){var l=$("log");l.textContent="";var immNow=/immortality: true/.test($("code").value);var lines=["Loading entity config…  done","Scope: entity_only  ok","Permanent abilities: 6 active","Simulating 20 damage…","Health reaches 0"];lines.push(immNow?"Immortality active, damage ignored. Echo stays alive.":"Immortality off, Echo dies.");if(!immNow)lines.push("Respawn at assigned bed.  done");lines.push("Test finished. Nothing was changed in the game.");var i=0;(function next(){if(i<lines.length){l.textContent+=(i?"\n":"")+lines[i++];setTimeout(next,380)}})()};
+$("clr").onclick=function(){$("log").textContent="Output cleared."};
+$("chk").onclick=function(){$("chkmsg").textContent="All checks passed at "+new Date().toLocaleTimeString()+"."};
+var perm=[["Echolocation","Sends out sound and reads the echoes to map the space around her."],["Vibration sense","Feels movement through blocks and ground, even out of sight."],["Hyperacute hearing","Picks up very faint and very distant sounds."],["Acoustic recognition","Identifies what made a sound, from a mob to a door."],["Directional awareness","Always knows which way a sound came from and where she is facing."],["Echo memory","Remembers sounds she has heard and where they came from."]];
+perm.forEach(function(p){var r=document.createElement("div");r.className="row";r.innerHTML='<div><strong>'+p[0]+'</strong><p>'+p[1]+'</p></div><span class="tag">Always on</span>';$("perm").appendChild(r)});
+var W=0,pr=-1,blips=[],mem=[{n:"Villager",w:"Southwest, 9 blocks",t:"last session"},{n:"Water flowing",w:"North, 6 blocks",t:"last session"},{n:"Door opening",w:"East, 4 blocks",t:"last session"}];
+var tg=[["Zombie",.8,.7],["Creeper",2.4,.85],["Villager",3.9,.4],["Water flowing",5.3,.6],["Door opening",1.5,.3]];
+var cv=$("radar"),cx=cv.getContext("2d"),still=window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+function cssv(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim()}
+function cap(s){return s.charAt(0).toUpperCase()+s.slice(1)}
+function dirOf(a){return ["north","northeast","east","southeast","south","southwest","west","northwest"][Math.round(a/.7854)%8]}
+function initRadar(){var p=cv.parentNode.clientWidth;if(!p)return;W=Math.max(200,Math.min(p-44,360));var d=window.devicePixelRatio||1;cv.style.width=W+"px";cv.style.height=W+"px";cv.width=W*d;cv.height=W*d;cx.setTransform(d,0,0,d,0,0);draw(performance.now())}
+function draw(now){if(!W)return;var h=W/2,a=cssv("--accent"),l=cssv("--line"),m=cssv("--mute"),s=cssv("--silver");cx.clearRect(0,0,W,W);cx.strokeStyle=l;cx.lineWidth=1;[1,.66,.33].forEach(function(f){cx.beginPath();cx.arc(h,h,f*(h-2),0,6.283);cx.stroke()});cx.beginPath();cx.moveTo(h,2);cx.lineTo(h,W-2);cx.moveTo(2,h);cx.lineTo(W-2,h);cx.stroke();cx.fillStyle=m;cx.font="11px Sora,sans-serif";cx.textAlign="center";cx.fillText("N",h,14);
+if(pr>=0&&pr<=1){cx.strokeStyle=a;cx.globalAlpha=1-pr;cx.lineWidth=2;cx.beginPath();cx.arc(h,h,pr*(h-2),0,6.283);cx.stroke();cx.globalAlpha=1}
+blips.forEach(function(b){var al=Math.max(.3,1-(now-b.t)/9000),x=h+Math.sin(b.a)*b.d*(h-2),y=h-Math.cos(b.a)*b.d*(h-2);cx.globalAlpha=al;cx.fillStyle=s;cx.beginPath();cx.arc(x,y,5,0,6.283);cx.fill();cx.fillStyle=a;cx.textAlign=x>h?"right":"left";cx.fillText(b.n,x+(x>h?-9:9),y+4);cx.globalAlpha=1});
+cx.fillStyle=a;cx.beginPath();cx.arc(h,h,5,0,6.283);cx.fill()}
+$("ping").onclick=function(){if(pr>=0)return;var bl=tg.map(function(t){var a=(t[1]+Math.random()*.5-.25+6.283)%6.283;return {n:t[0],a:a,d:t[2],w:cap(dirOf(a))+", "+Math.round(t[2]*20)+" blocks",r:0}});blips=[];$("ping").disabled=true;var t0=performance.now();
+function done(){pr=-1;$("ping").disabled=false;$("pinglist").textContent=blips.map(function(b){return b.n+": "+b.w}).join("\n");var ts=new Date().toLocaleTimeString();blips.forEach(function(b){mem.unshift({n:b.n,w:b.w,t:ts})});mem=mem.slice(0,40);drawMem();draw(performance.now())}
+function step(now){pr=still?1:(now-t0)/1600;bl.forEach(function(b){if(!b.r&&pr>=b.d){b.r=1;b.t=now;blips.push(b)}});if(pr>=1){bl.forEach(function(b){if(!b.r){b.r=1;b.t=now;blips.push(b)}});done();return}draw(now);requestAnimationFrame(step)}
+requestAnimationFrame(step)};
+function drawMem(){var q=$("memq").value.toLowerCase(),box=$("mem");box.innerHTML="";var list=mem.filter(function(m){return (m.n+" "+m.w).toLowerCase().indexOf(q)>-1});list.forEach(function(m){var d=document.createElement("div");d.className="ver";d.innerHTML='<div><strong>'+m.n+'</strong><small>'+m.w+', '+m.t+'</small></div><span class="tag">Remembered</span>';box.appendChild(d)});if(!list.length)box.innerHTML='<p class="note">Nothing matches. Send a ping to add new sounds.</p>';$("memn").textContent=list.length+" of "+mem.length+" shown"}
+$("memq").oninput=drawMem;window.onresize=function(){if($("echolocation").classList.contains("on"))initRadar()};
+drawMem();
+drawV();
+</script>
+</body>
+</html>
