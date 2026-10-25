@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#060608">
+<meta name="theme-color" content="#04050a">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -12,153 +12,153 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="icon-192.png">
 <title>ECHO ADMIN</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&family=Michroma&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#eceef3;--panel:#fff;--line:#d3d7e0;--text:#14151c;--mute:#5d6272;--silver:#4a5062;--accent:#6a4df0;--accent2:#1d7fe0;--ok:#16905a;--warn:#b5651d;--code:#f4f5f9;
-box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#060608;--panel:#0f1016;--line:#23242f;--text:#e6e8ee;--mute:#8b90a0;--silver:#c9ced8;--accent:#9a82ff;--accent2:#58aaff;--ok:#5fd6a0;--warn:#e8a15c;--code:#0a0b10}}
-:root[data-theme="dark"]{--bg:#060608;--panel:#0f1016;--line:#23242f;--text:#e6e8ee;--mute:#8b90a0;--silver:#c9ced8;--accent:#9a82ff;--accent2:#58aaff;--ok:#5fd6a0;--warn:#e8a15c;--code:#0a0b10}
+:root{--bg:#04050a;--ice:#9fd8ff;--line:rgba(255,255,255,.2);--line2:rgba(255,255,255,.55);--tx:#e9edf3;--mute:#8d96a6;--glass:rgba(150,200,255,.045);--mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;--dh:clamp(170px,42vh,300px);
+box-sizing:border-box;color-scheme:dark;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 *{box-sizing:border-box}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;background:var(--bg);color:var(--text);font:400 15px/1.55 Sora,system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}
-.shell{max-width:1040px;margin:0 auto;padding:20px 16px 48px;display:grid;gap:18px;grid-template-columns:200px 1fr}
-header{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-h1{margin:0;font-size:22px;font-weight:300;letter-spacing:.32em;color:var(--silver)}
-h1 b{font-weight:600;color:var(--text)}
-.pill{font-size:12px;border:1px solid var(--line);border-radius:99px;padding:4px 12px;color:var(--mute)}
-.pill i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ok);margin-right:8px}
-nav{display:flex;flex-direction:column;gap:4px}
-nav button{font:inherit;text-align:left;background:none;border:0;border-left:2px solid var(--line);color:var(--mute);padding:9px 12px;cursor:pointer}
-nav button[aria-selected="true"]{color:var(--text);border-left-color:var(--accent);background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 14%,transparent),transparent)}
-nav button:focus-visible,.btn:focus-visible,.sw:focus-visible,textarea:focus-visible{outline:2px solid var(--accent2);outline-offset:2px}
-section{display:none;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:22px}
-section.on{display:block}
-h2{margin:0 0 4px;font-size:18px;font-weight:600}
-.sub{color:var(--mute);margin:0 0 18px;max-width:60ch}
-.hero{display:flex;gap:28px;align-items:center;flex-wrap:wrap;margin-bottom:22px}
-.core{position:relative;width:150px;height:150px;flex:none;display:grid;place-items:center}
-.core span{position:absolute;inset:0;border-radius:50%;border:1px solid var(--accent);opacity:0}
-.imm .core span{animation:ring 3.6s ease-out infinite}
-.imm .core span:nth-child(2){animation-delay:1.2s}.imm .core span:nth-child(3){animation-delay:2.4s}
-@keyframes ring{0%{transform:scale(.45);opacity:.8}100%{transform:scale(1.15);opacity:0}}
-.core em{position:relative;width:64px;height:64px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,var(--silver) 55%,var(--accent) 120%);box-shadow:0 0 28px color-mix(in srgb,var(--accent) 55%,transparent);transition:filter .3s,box-shadow .3s}
-body:not(.imm) .core em{filter:grayscale(1) brightness(.55);box-shadow:none}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;flex:1;min-width:240px}
-.stat{border:1px solid var(--line);border-radius:8px;padding:10px 12px}
-.stat small{display:block;color:var(--mute);font-size:12px}
-.stat strong{font-weight:600}
-.row{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:14px 0;border-top:1px solid var(--line)}
-.row:first-of-type{border-top:0}
-.row p{margin:2px 0 0;color:var(--mute);font-size:13px;max-width:52ch}
-.sw{flex:none;width:52px;height:30px;border-radius:99px;border:1px solid var(--line);background:var(--code);position:relative;cursor:pointer;padding:0;transition:background .25s}
-.sw::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:var(--mute);transition:transform .25s,background .25s}
-.sw[aria-checked="true"]{background:color-mix(in srgb,var(--accent) 35%,var(--code));border-color:var(--accent)}
-.sw[aria-checked="true"]::after{transform:translateX(22px);background:var(--silver)}
-.btn{font:inherit;font-size:13px;background:none;color:var(--text);border:1px solid var(--line);border-radius:6px;padding:8px 14px;cursor:pointer}
-.btn:hover{border-color:var(--accent)}.btn.pri{background:var(--accent);border-color:var(--accent);color:#fff}
-.btn:disabled{opacity:.4;cursor:not-allowed}
-textarea{width:100%;min-height:230px;background:var(--code);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:14px;font:400 13px/1.6 "IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;resize:vertical}
-.bar{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;align-items:center}
-.note{color:var(--mute);font-size:13px}
-.log{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:14px;margin-top:12px;min-height:120px;font:400 13px/1.7 "IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;overflow-x:auto;white-space:pre}
-.ver{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--line)}
-.ver:first-child{border-top:0}.ver small{color:var(--mute);display:block}
-.ver.cur strong::after{content:" (current)";color:var(--ok);font-weight:400;font-size:13px}
-.ok{color:var(--ok)}.warn{color:var(--warn)}.h3{margin-top:26px;font-size:16px}.tag{flex:none;font-size:12px;border:1px solid var(--line);border-radius:99px;padding:3px 10px;color:var(--silver)}
-canvas{display:block;margin:0 auto 14px;max-width:100%}input[type=search]{flex:1;min-width:180px;font:inherit;font-size:13px;background:var(--code);color:var(--text);border:1px solid var(--line);border-radius:6px;padding:8px 12px}input[type=search]:focus-visible{outline:2px solid var(--accent2);outline-offset:2px}.foot{grid-column:1/-1;color:var(--mute);font-size:12px;text-align:center;margin-top:6px}
-@media (max-width:760px){.shell{grid-template-columns:1fr}nav{flex-direction:row;overflow-x:auto;gap:2px;border-bottom:1px solid var(--line)}nav button{white-space:nowrap;border-left:0;border-bottom:2px solid transparent}nav button[aria-selected="true"]{border-bottom-color:var(--accent);background:none}}
-@media (prefers-reduced-motion:reduce){.core span{animation:none!important}.sw::after,.sw{transition:none}}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{height:100%;margin:0;background:var(--bg);color:var(--tx);font:400 14px/1.5 Manrope,system-ui,-apple-system,"Segoe UI",sans-serif;overflow:hidden}
+:focus-visible{outline:2px solid var(--ice);outline-offset:2px}
+#scene{position:relative;height:100%;overflow:hidden;background:radial-gradient(ellipse 60% 42% at 50% 40%,rgba(159,216,255,.2),transparent 70%),repeating-linear-gradient(0deg,rgba(255,255,255,.022) 0 1px,transparent 1px 72px),repeating-linear-gradient(90deg,rgba(255,255,255,.016) 0 1px,transparent 1px 72px),linear-gradient(#07080d,#020307)}
+#scene::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,transparent 45%,rgba(0,0,0,.78));pointer-events:none}
+.door{position:absolute;left:50%;top:12%;width:clamp(90px,26vw,150px);height:var(--dh);transform:translateX(-50%);border:1px solid rgba(255,255,255,.9);outline:10px solid #0a0b11;background:linear-gradient(#fff,rgba(205,236,255,.9) 18%,rgba(159,216,255,.35) 70%,rgba(159,216,255,.1));box-shadow:0 0 60px 8px rgba(159,216,255,.35);animation:breathe 6s ease-in-out infinite;transition:opacity .6s}
+.floor{position:absolute;left:0;right:0;top:calc(12% + var(--dh));bottom:0;background:radial-gradient(ellipse 38% 55% at 50% 0,rgba(159,216,255,.2),transparent 70%)}
+.hint{position:absolute;left:0;right:0;bottom:calc(env(safe-area-inset-bottom,0px) + 18px);text-align:center;font:12px var(--mono);color:var(--mute);z-index:1}
+#con{position:absolute;left:50%;bottom:17%;width:min(260px,72vw);transform:translateX(-50%);padding:16px 14px;background:linear-gradient(rgba(159,216,255,.13),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.7);color:var(--tx);font:inherit;cursor:pointer;backdrop-filter:blur(6px);animation:bob 5s ease-in-out infinite;z-index:2;transition:opacity .4s}
+#con b{display:block;font:400 13px Michroma,sans-serif;letter-spacing:.3em}
+#con small{display:block;margin-top:6px;font:12px var(--mono);color:var(--ice)}
+#con::before{content:"";position:absolute;left:12%;right:12%;top:-1px;height:1px;background:#fff;box-shadow:0 0 10px 1px rgba(255,255,255,.8)}
+#con::after{content:"";position:absolute;left:8%;right:8%;bottom:-34px;height:10px;background:radial-gradient(ellipse,rgba(159,216,255,.35),transparent 70%);animation:sh 5s ease-in-out infinite}
+#scene.open .door{opacity:.3}#scene.open #con{opacity:0;pointer-events:none}
+.ui{position:fixed;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;padding:calc(env(safe-area-inset-top,0px) + 12px) 12px calc(env(safe-area-inset-bottom,0px) + 12px);background:rgba(2,3,6,.8);backdrop-filter:blur(3px)}
+.ui[hidden]{display:none}
+.box{position:relative;width:min(720px,100%);max-height:100%;display:flex;flex-direction:column;padding:18px}
+.ln{position:absolute;background:#fff;box-shadow:0 0 6px rgba(159,216,255,.8)}
+.ln.t{top:0;left:0;right:0;height:1px;transform-origin:left}.ln.r{top:0;right:0;bottom:0;width:1px;transform-origin:top}.ln.b{bottom:0;left:0;right:0;height:1px;transform-origin:right}.ln.l{top:0;left:0;bottom:0;width:1px;transform-origin:bottom}
+.hd{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}
+.wm{font:400 13px Michroma,sans-serif;letter-spacing:.3em}.xyz{font:12px var(--mono);color:var(--mute);margin-left:auto}
+.x{width:34px;height:34px;border:1px solid var(--line2);background:none;color:#fff;font-size:18px;cursor:pointer}
+.nav{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:12px}
+@media(min-width:640px){.nav{grid-template-columns:repeat(6,1fr)}}
+.nav button{background:none;border:1px solid var(--line);color:var(--mute);padding:8px 8px;font:inherit;font-size:12px;line-height:1.3;text-align:left;cursor:pointer}
+.nav .n{font:11px var(--mono);color:var(--ice)}
+.nav button[aria-selected="true"]{color:#fff;border-color:var(--line2);background:var(--glass);box-shadow:inset 0 -1px var(--ice)}
+.inner{flex:1;min-height:0;overflow-y:auto}
+.panel{position:relative;border:1px solid var(--line);background:var(--glass);padding:18px;backdrop-filter:blur(4px)}
+.panel::before,.panel::after{content:"";position:absolute;width:10px;height:10px;border:1px solid #fff}
+.panel::before{top:-1px;left:-1px;border-right:0;border-bottom:0}.panel::after{bottom:-1px;right:-1px;border-left:0;border-top:0}
+h2{margin:0 0 4px;font-size:20px;font-weight:300;letter-spacing:.02em}
+h3{margin:22px 0 2px;font-size:13px;font-weight:600;color:var(--mute)}
+.sub{color:var(--mute);margin:0 0 14px;max-width:60ch;font-size:13px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:12px 0;border-top:1px solid var(--line)}
+.row p{margin:2px 0 0;color:var(--mute);font-size:12.5px;max-width:46ch}
+.sw{flex:none;width:44px;height:22px;border:1px solid var(--line2);background:none;position:relative;cursor:pointer;padding:0}
+.sw::after{content:"";position:absolute;top:3px;left:3px;width:14px;height:14px;background:var(--mute);transition:transform .2s,background .2s}
+.sw[aria-checked="true"]{border-color:var(--ice);box-shadow:0 0 12px rgba(159,216,255,.35)}
+.sw[aria-checked="true"]::after{transform:translateX(22px);background:#fff}
+.rg{display:flex;align-items:center;gap:10px}input[type=range]{width:min(170px,40vw);accent-color:var(--ice)}
+.val{font:12px var(--mono);color:var(--ice);min-width:4ch;text-align:right}
+input[type=text],input[type=number],select{width:150px;min-width:0;background:rgba(0,0,0,.35);color:var(--tx);border:1px solid var(--line);border-bottom-color:var(--line2);padding:7px 10px;font:inherit;font-size:13px}
+input.num{font-family:var(--mono)}
+.btn{background:none;border:1px solid var(--line2);color:#fff;padding:8px 14px;font:inherit;font-size:13px;cursor:pointer}.btn:hover{background:rgba(255,255,255,.08)}
+.btns{display:flex;gap:8px;flex-wrap:wrap}
+.mono{font-family:var(--mono);font-size:12px;color:var(--mute)}
+.bed{border:1px solid var(--line2);padding:14px;margin-bottom:12px;font-family:var(--mono)}.big{font-size:clamp(17px,5.2vw,26px);letter-spacing:.06em;white-space:pre}.bed .mute{color:var(--ice);font-size:12px;margin-top:4px}
+.bear,.skin{display:flex;align-items:center;gap:16px;padding:12px 0;border-top:1px solid var(--line)}.bear p{margin:2px 0 0}
+canvas{image-rendering:pixelated;border:1px solid var(--line2);box-shadow:0 0 18px rgba(159,216,255,.25)}
+.logb{white-space:pre-wrap;padding:10px 0;border-top:1px solid var(--line)}
+.msgb{margin-top:12px;font:12px var(--mono);color:var(--ice);min-height:1.5em}.msgb::before{content:"> "}
+.pt{position:absolute;left:50%;top:50%;width:6px;height:6px;margin:-3px;border-radius:50%;background:#fff;box-shadow:0 0 18px 6px rgba(255,255,255,.9),0 0 60px 20px rgba(159,216,255,.5);opacity:0;pointer-events:none}
+@keyframes breathe{50%{box-shadow:0 0 90px 14px rgba(159,216,255,.45)}}
+@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,-8px)}}
+@keyframes sh{0%,100%{opacity:.9;transform:scaleX(1)}50%{opacity:.5;transform:scaleX(.82)}}
+@keyframes tx{from{transform:scaleX(0)}}@keyframes ty{from{transform:scaleY(0)}}
+@keyframes unf{from{transform:scaleY(.02);opacity:0}}@keyframes fi{from{opacity:0}}
+@keyframes col{0%{transform:scale(1);opacity:1}55%{transform:scale(1,.01);opacity:1}85%{transform:scale(.01);opacity:1}100%{transform:scale(0);opacity:0}}
+@keyframes ptl{0%,60%{opacity:0;transform:scale(.3)}85%{opacity:1;transform:scale(1.1)}100%{opacity:0;transform:scale(2)}}
+.opening .t{animation:tx .3s linear both}.opening .r{animation:ty .3s linear .3s both}.opening .b{animation:tx .3s linear .6s both}.opening .l{animation:ty .3s linear .9s both}
+.opening .hd,.opening .msgb{animation:fi .5s ease 1.2s both}
+.opening .nav{animation:unf .5s cubic-bezier(.2,.8,.2,1) 1.25s both}.opening .panel{animation:unf .6s cubic-bezier(.2,.8,.2,1) 1.45s both}
+.panel.unf{animation:unf .45s cubic-bezier(.2,.8,.2,1) both}
+.closing .box{animation:col .9s cubic-bezier(.7,0,.3,1) forwards}.closing .pt{animation:ptl .9s ease forwards}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 </head>
-<body class="imm">
-<div class="shell">
-<header><h1><b>ECHO</b> ADMIN</h1><span class="pill"><i></i>Private session, owner verified</span></header>
-<nav role="tablist" aria-label="Portal sections" id="nav"></nav>
-<div>
-<section id="overview" class="on"><div class="hero"><div class="core" aria-hidden="true"><span></span><span></span><span></span><em></em></div>
-<div class="stats"><div class="stat"><small>Entity</small><strong>Echo</strong></div><div class="stat"><small>Status</small><strong id="st">Immortal</strong></div><div class="stat"><small>Respawn</small><strong>Assigned bed</strong></div><div class="stat"><small>Scope</small><strong>Entity code only</strong></div></div></div>
-<h2>Entity overview</h2><p class="sub">Echo’s current configuration and active abilities. This portal manages the Echo entity and nothing else in the game.</p>
-<div class="row"><div><strong>Active abilities</strong><p id="abl">Immortality (on), 6 permanent abilities</p></div></div>
-<div class="row"><div><strong>Last revision</strong><p id="lastrev">v1.2, respawn at assigned bed</p></div></div></section>
-
-<section id="abilities"><h2>Ability manager</h2><p class="sub">Turn abilities on or off for the Echo entity. Changes are written to the code editor and logged in version history.</p>
-<div class="row"><div><strong>Immortality</strong><p>On by default. Turn it off and Echo can die like any player, then respawn at her assigned bed. Death is never permanent.</p></div><button class="sw" id="imm" role="switch" aria-checked="true" aria-label="Immortality"></button></div><h2 class="h3">Permanent abilities</h2><p class="sub">Part of Echo’s original code. These are always on and have no switch.</p><div id="perm"></div></section>
-
-<section id="editor"><h2>Code editor</h2><p class="sub">Edit and extend the Echo entity’s own code. Changes only take effect through a compatible integration.</p>
-<textarea id="code" spellcheck="false" aria-label="Entity code"></textarea>
-<div class="bar"><button class="btn pri" id="save">Save revision</button><span class="note" id="edmsg"></span></div></section>
-
-<section id="history"><h2>Version history</h2><p class="sub">Every saved revision, with restore points.</p><div id="vlist"></div></section>
-
-<section id="echolocation"><h2>Echolocation</h2><p class="sub">Send out a ping and see what comes back. Everything the ping finds is saved to Echo memory.</p><canvas id="radar" role="img" aria-label="Radar view of sounds around Echo"></canvas><div class="bar" style="justify-content:center;margin-top:0"><button class="btn pri" id="ping">Send ping</button><span class="note">Range: 20 blocks</span></div><div id="pinglist" class="log" aria-live="polite">No ping sent yet.</div></section>
-<section id="memory"><h2>Echo memory</h2><p class="sub">Sounds Echo has heard, where they came from, and what made them.</p><div class="bar" style="margin:0 0 8px"><input type="search" id="memq" placeholder="Search sounds or directions" aria-label="Search echo memory"><span class="note" id="memn"></span></div><div id="mem"></div></section>
-<section id="sandbox"><h2>Testing sandbox</h2><p class="sub">Run the current code in a closed test environment before using it in the game.</p>
-<div class="bar" style="margin-top:0"><button class="btn pri" id="run">Run damage test</button><button class="btn" id="clr">Clear output</button></div>
-<div class="log" id="log" aria-live="polite">Ready. Nothing has been run yet.</div></section>
-
-<section id="integration"><h2>Integration status</h2><p class="sub">Whether the Echo entity is connected to a compatible Minecraft environment.</p>
-<div class="row"><div><strong>Compatible environment</strong></div><span class="ok">Detected</span></div>
-<div class="row"><div><strong>Entity hook</strong></div><span class="ok">Registered</span></div>
-<div class="row"><div><strong>Scope check</strong><p>Only the Echo entity and its agreed code are reachable.</p></div><span class="ok">Entity only</span></div>
-<div class="row"><div><strong>Global game code</strong><p>Not covered by Echo’s agreement.</p></div><span class="warn">No access</span></div>
-<div class="bar"><button class="btn" id="chk">Check again</button><span class="note" id="chkmsg"></span></div></section>
-
-<section id="security"><h2>Security controls</h2><p class="sub">Private access and protection for Echo’s original entity code.</p>
-<div class="row"><div><strong>Lock original entity code</strong><p>Makes the editor read-only until you unlock it.</p></div><button class="sw" id="lock" role="switch" aria-checked="false" aria-label="Lock original entity code"></button></div>
-<div class="row"><div><strong>Require passphrase on sign-in</strong><p>Ask for your passphrase each time this portal opens.</p></div><button class="sw" id="pass" role="switch" aria-checked="true" aria-label="Require passphrase"></button></div>
-<div class="row"><div><strong>Access key</strong><p>Shown masked. Only the owner can rotate it.</p></div><code>••••-••••-E7C0</code></div>
-<div class="row"><div><strong>Reset saved data</strong><p>Clears saved revisions and echo memory on this device.</p></div><button class="btn" id="reset">Reset</button></div></section>
-</div>
-<div class="foot">Fan-made fictional portal for the original character Echo. Not affiliated with Mojang or Microsoft.</div>
-</div>
+<body>
+<main id="scene">
+<div class="door" aria-hidden="true"></div><div class="floor" aria-hidden="true"></div>
+<button id="con" aria-label="Activate ECHO ADMIN"><b>ECHO ADMIN</b><small>Tap to activate</small></button>
+<div class="hint">Private chamber. Echo only.</div>
+<div class="ui" id="ui" hidden role="dialog" aria-modal="true" aria-label="ECHO ADMIN"><i class="pt"></i>
+<div class="box"><i class="ln t"></i><i class="ln r"></i><i class="ln b"></i><i class="ln l"></i>
+<div class="hd"><span class="wm">ECHO ADMIN</span><span class="xyz">X 0   Y −59   Z 0</span><button class="x" id="cl" aria-label="Close">×</button></div>
+<div class="nav" id="nav" role="tablist" aria-label="Sections"></div>
+<div class="inner"><div class="panel" id="panel"></div></div>
+<div class="msgb" id="msg" aria-live="polite"></div>
+</div></div>
+</main>
 <script>
 var $=function(i){return document.getElementById(i)};
-var tabs=[["overview","Overview"],["abilities","Abilities"],["echolocation","Echolocation"],["memory","Echo memory"],["editor","Code editor"],["history","Version history"],["sandbox","Sandbox"],["integration","Integration"],["security","Security"]];
-var imm=true,locked=false;
-function tpl(i){return 'entity Echo {\n  owner: "Echo"\n  scope: "entity_only"\n  permanent {\n    echolocation\n    vibration_sense\n    hyperacute_hearing\n    acoustic_recognition\n    directional_awareness\n    echo_memory\n  }\n  abilities {\n    immortality: '+i+'\n  }\n  respawn { point: "assigned_bed" }\n}'}
-var vers=[{n:"v1.0",d:"Original entity, handed over by Markus",c:tpl(true).replace(/  abilities[\s\S]*?  }\n/,"").replace('  respawn { point: "assigned_bed" }\n',"")},{n:"v1.1",d:"Immortality system added",c:tpl(true).replace('  respawn { point: "assigned_bed" }\n',"")},{n:"v1.2",d:"Respawn at assigned bed",c:tpl(true)}];
-var cur=2;
-var nav=$("nav");
-tabs.forEach(function(t,i){var b=document.createElement("button");b.textContent=t[1];b.setAttribute("role","tab");b.setAttribute("aria-selected",i==0);b.onclick=function(){show(t[0])};b.dataset.t=t[0];nav.appendChild(b)});
-function show(id){document.querySelectorAll("section").forEach(function(s){s.classList.toggle("on",s.id==id)});nav.querySelectorAll("button").forEach(function(b){b.setAttribute("aria-selected",b.dataset.t==id)});if(id=="echolocation")initRadar()}
-$("code").value=tpl(true);
-function drawV(){$("vlist").innerHTML="";vers.slice().reverse().forEach(function(v,k){var i=vers.length-1-k;var d=document.createElement("div");d.className="ver"+(i==cur?" cur":"");d.innerHTML='<div><strong>'+v.n+'</strong><small>'+v.d+'</small></div>';var b=document.createElement("button");b.className="btn";b.textContent="Restore";b.disabled=locked||i==cur;b.onclick=function(){cur=i;$("code").value=v.c;var m=/immortality: (true|false)/.exec(v.c);if(m)setImm(m[1]=="true",true);$("lastrev").textContent=v.n+", "+v.d;$("edmsg").textContent="Restored "+v.n+".";drawV()};d.appendChild(b);$("vlist").appendChild(d)})}
-function setImm(on,quiet){imm=on;$("imm").setAttribute("aria-checked",on);document.body.classList.toggle("imm",on);$("st").textContent=on?"Immortal":"Mortal";$("abl").textContent=(on?"Immortality (on), ":"")+"6 permanent abilities";$("code").value=$("code").value.replace(/immortality: (true|false)/,"immortality: "+on);if(!quiet)$("edmsg").textContent="Immortality turned "+(on?"on":"off")+". Save a revision to keep this change."}
-$("imm").onclick=function(){if(locked){$("edmsg").textContent="Code is locked. Unlock it in Security controls first.";show("security");return}setImm(!imm)};
-$("save").onclick=function(){if(locked)return;var n="v1."+vers.length;var d=imm?"Saved with immortality on":"Saved with immortality off";vers.push({n:n,d:d,c:$("code").value});cur=vers.length-1;$("lastrev").textContent=n+", "+d;$("edmsg").textContent="Saved "+n+".";drawV()};
-$("lock").onclick=function(){locked=!locked;this.setAttribute("aria-checked",locked);$("code").readOnly=locked;$("save").disabled=locked;$("edmsg").textContent=locked?"Editor is read-only.":"Editor unlocked.";drawV()};
-$("pass").onclick=function(){this.setAttribute("aria-checked",this.getAttribute("aria-checked")!="true")};
-$("run").onclick=function(){var l=$("log");l.textContent="";var immNow=/immortality: true/.test($("code").value);var lines=["Loading entity config…  done","Scope: entity_only  ok","Permanent abilities: 6 active","Simulating 20 damage…","Health reaches 0"];lines.push(immNow?"Immortality active, damage ignored. Echo stays alive.":"Immortality off, Echo dies.");if(!immNow)lines.push("Respawn at assigned bed.  done");lines.push("Test finished. Nothing was changed in the game.");var i=0;(function next(){if(i<lines.length){l.textContent+=(i?"\n":"")+lines[i++];setTimeout(next,380)}})()};
-$("clr").onclick=function(){$("log").textContent="Output cleared."};
-$("chk").onclick=function(){$("chkmsg").textContent="All checks passed at "+new Date().toLocaleTimeString()+"."};
-var perm=[["Echolocation","Sends out sound and reads the echoes to map the space around her."],["Vibration sense","Feels movement through blocks and ground, even out of sight."],["Hyperacute hearing","Picks up very faint and very distant sounds."],["Acoustic recognition","Identifies what made a sound, from a mob to a door."],["Directional awareness","Always knows which way a sound came from and where she is facing."],["Echo memory","Remembers sounds she has heard and where they came from."]];
-perm.forEach(function(p){var r=document.createElement("div");r.className="row";r.innerHTML='<div><strong>'+p[0]+'</strong><p>'+p[1]+'</p></div><span class="tag">Always on</span>';$("perm").appendChild(r)});
-var W=0,pr=-1,blips=[],mem=[{n:"Villager",w:"Southwest, 9 blocks",t:"last session"},{n:"Water flowing",w:"North, 6 blocks",t:"last session"},{n:"Door opening",w:"East, 4 blocks",t:"last session"}];
-var tg=[["Zombie",.8,.7],["Creeper",2.4,.85],["Villager",3.9,.4],["Water flowing",5.3,.6],["Door opening",1.5,.3]];
-var cv=$("radar"),cx=cv.getContext("2d"),still=window.matchMedia("(prefers-reduced-motion:reduce)").matches;
-function cssv(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim()}
-function cap(s){return s.charAt(0).toUpperCase()+s.slice(1)}
-function dirOf(a){return ["north","northeast","east","southeast","south","southwest","west","northwest"][Math.round(a/.7854)%8]}
-function initRadar(){var p=cv.parentNode.clientWidth;if(!p)return;W=Math.max(200,Math.min(p-44,360));var d=window.devicePixelRatio||1;cv.style.width=W+"px";cv.style.height=W+"px";cv.width=W*d;cv.height=W*d;cx.setTransform(d,0,0,d,0,0);draw(performance.now())}
-function draw(now){if(!W)return;var h=W/2,a=cssv("--accent"),l=cssv("--line"),m=cssv("--mute"),s=cssv("--silver");cx.clearRect(0,0,W,W);cx.strokeStyle=l;cx.lineWidth=1;[1,.66,.33].forEach(function(f){cx.beginPath();cx.arc(h,h,f*(h-2),0,6.283);cx.stroke()});cx.beginPath();cx.moveTo(h,2);cx.lineTo(h,W-2);cx.moveTo(2,h);cx.lineTo(W-2,h);cx.stroke();cx.fillStyle=m;cx.font="11px Sora,sans-serif";cx.textAlign="center";cx.fillText("N",h,14);
-if(pr>=0&&pr<=1){cx.strokeStyle=a;cx.globalAlpha=1-pr;cx.lineWidth=2;cx.beginPath();cx.arc(h,h,pr*(h-2),0,6.283);cx.stroke();cx.globalAlpha=1}
-blips.forEach(function(b){var al=Math.max(.3,1-(now-b.t)/9000),x=h+Math.sin(b.a)*b.d*(h-2),y=h-Math.cos(b.a)*b.d*(h-2);cx.globalAlpha=al;cx.fillStyle=s;cx.beginPath();cx.arc(x,y,5,0,6.283);cx.fill();cx.fillStyle=a;cx.textAlign=x>h?"right":"left";cx.fillText(b.n,x+(x>h?-9:9),y+4);cx.globalAlpha=1});
-cx.fillStyle=a;cx.beginPath();cx.arc(h,h,5,0,6.283);cx.fill()}
-$("ping").onclick=function(){if(pr>=0)return;var bl=tg.map(function(t){var a=(t[1]+Math.random()*.5-.25+6.283)%6.283;return {n:t[0],a:a,d:t[2],w:cap(dirOf(a))+", "+Math.round(t[2]*20)+" blocks",r:0}});blips=[];$("ping").disabled=true;var t0=performance.now();
-function done(){pr=-1;$("ping").disabled=false;$("pinglist").textContent=blips.map(function(b){return b.n+": "+b.w}).join("\n");var ts=new Date().toLocaleTimeString();blips.forEach(function(b){mem.unshift({n:b.n,w:b.w,t:ts})});mem=mem.slice(0,40);drawMem();persist();draw(performance.now())}
-function step(now){pr=still?1:(now-t0)/1600;bl.forEach(function(b){if(!b.r&&pr>=b.d){b.r=1;b.t=now;blips.push(b)}});if(pr>=1){bl.forEach(function(b){if(!b.r){b.r=1;b.t=now;blips.push(b)}});done();return}draw(now);requestAnimationFrame(step)}
-requestAnimationFrame(step)};
-function drawMem(){var q=$("memq").value.toLowerCase(),box=$("mem");box.innerHTML="";var list=mem.filter(function(m){return (m.n+" "+m.w).toLowerCase().indexOf(q)>-1});list.forEach(function(m){var d=document.createElement("div");d.className="ver";d.innerHTML='<div><strong>'+m.n+'</strong><small>'+m.w+', '+m.t+'</small></div><span class="tag">Remembered</span>';box.appendChild(d)});if(!list.length)box.innerHTML='<p class="note">Nothing matches. Send a ping to add new sounds.</p>';$("memn").textContent=list.length+" of "+mem.length+" shown"}
-$("memq").oninput=drawMem;window.onresize=function(){if($("echolocation").classList.contains("on"))initRadar()};
-var KEY="echo-admin-state",noSave=false;
-function persist(){if(noSave)return;try{localStorage.setItem(KEY,JSON.stringify({vers:vers,cur:cur,imm:imm,locked:locked,mem:mem,last:$("lastrev").textContent,code:$("code").value}))}catch(e){}}
-(function(){try{var s=JSON.parse(localStorage.getItem(KEY)||"null");if(!s)return;vers=s.vers;cur=s.cur;mem=s.mem;$("code").value=s.code;$("lastrev").textContent=s.last;setImm(s.imm,true);if(s.locked){locked=true;$("lock").setAttribute("aria-checked","true");$("code").readOnly=true;$("save").disabled=true}}catch(e){}})();
-document.addEventListener("click",function(){setTimeout(persist,0)});
-$("code").addEventListener("input",persist);
-$("reset").onclick=function(){if(confirm("Clear all saved revisions and echo memory on this device?")){noSave=true;try{localStorage.removeItem(KEY)}catch(e){}location.reload()}};
-drawMem();
-drawV();
+function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+var C={
+cfg:[{i:"vol",t:"r",l:"Master volume",min:0,max:100,d:80,u:"%"},{i:"fov",t:"r",l:"Field of view",min:30,max:110,d:70,u:"°"},{i:"sneak",t:"s",l:"Toggle sneak",s:"Tap once to sneak, tap again to stop.",d:false},{i:"sprint",t:"s",l:"Toggle sprint",s:"Tap once to keep sprinting.",d:true},{i:"narr",t:"s",l:"Narrator",s:"Reads menus and chat aloud.",d:true}],
+per:[{i:"dir",t:"s",l:"Directional audio",s:"Pans sounds left and right to match where they come from.",d:true},{i:"pan",t:"r",l:"Pan strength",min:0,max:100,d:70,u:"%"},{i:"spat",t:"s",l:"Spatial feedback",s:"Short cues when blocks or drops change nearby.",d:true},{i:"ctone",t:"s",l:"Compass tone",s:"A soft tone when she faces north.",d:true},{i:"beacon",t:"s",l:"Bed beacon",s:"A repeating tone that quickens as she nears her bed.",d:false}],
+pos:[{i:"px",t:"n",l:"Position X",d:0},{i:"py",t:"n",l:"Position Y",d:64},{i:"pz",t:"n",l:"Position Z",d:0}],
+abl:[{i:"keepinv",t:"s",l:"Keep inventory",s:"Keeps her items when she dies.",d:false},{i:"dmark",t:"s",l:"Death marker",s:"Records where she last died.",d:true},{i:"ledge",t:"s",l:"Ledge warning",s:"Warns before a drop of three blocks or more.",d:true},{i:"ajump",t:"s",l:"Auto-jump",s:"Hops up single blocks as she walks.",d:false}],
+res:[{i:"bx",t:"n",l:"Bed X",d:0},{i:"by",t:"n",l:"Bed Y",d:0},{i:"bz",t:"n",l:"Bed Z",d:0},{i:"dim",t:"o",l:"Dimension",o:["Overworld","The Nether","The End"],d:"Overworld"}],
+idn:[{i:"model",t:"o",l:"Skin model",o:["Classic","Slim"],d:"Classic"},{i:"scale",t:"o",l:"Interface scale",o:["Auto","Small","Normal","Large"],d:"Auto"},{i:"contrast",t:"s",l:"High contrast interface",s:"White on black for menus and text.",d:false},{i:"tag",t:"s",l:"Show own name tag",d:true}]};
+var ALL=[];for(var k in C)ALL=ALL.concat(C[k]);
+var T=[["cfg","Configuration"],["per","Perception"],["abl","Abilities"],["res","Respawn"],["idn","Identity"],["sys","System Status"]];
+var KEY="echo-admin-3",S={v:{},presets:[],death:null,tested:false,bedChk:false},log=[];
+ALL.forEach(function(c){S.v[c.i]=c.d});
+try{var st=JSON.parse(localStorage.getItem(KEY)||"null");if(st){for(var q in st.v)if(q in S.v)S.v[q]=st.v[q];S.presets=st.presets||[];S.death=st.death||null;S.tested=!!st.tested;S.bedChk=!!st.bedChk}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function msg(t){$("msg").textContent=t;log.unshift(new Date().toLocaleTimeString()+"  "+t);log=log.slice(0,8)}
+var fmt=function(n){return String(n).replace("-","−")};
+function row(c){var r=el("div","row"),d=el("div");d.appendChild(el("strong",null,c.l));if(c.s)d.appendChild(el("p",null,c.s));r.appendChild(d);var v=S.v[c.i],i;
+if(c.t=="s"){i=el("button","sw");i.setAttribute("role","switch");i.setAttribute("aria-checked",v);i.setAttribute("aria-label",c.l);i.onclick=function(){var n=!S.v[c.i];S.v[c.i]=n;i.setAttribute("aria-checked",n);save();msg(c.l+(n?" on.":" off."))};r.appendChild(i)}
+else if(c.t=="r"){var w=el("div","rg"),o=el("span","val",v+c.u);i=document.createElement("input");i.type="range";i.min=c.min;i.max=c.max;i.value=v;i.setAttribute("aria-label",c.l);i.oninput=function(){S.v[c.i]=Number(i.value);o.textContent=i.value+c.u;save()};i.onchange=function(){msg(c.l+" set to "+i.value+c.u+".")};w.appendChild(i);w.appendChild(o);r.appendChild(w)}
+else if(c.t=="o"){i=document.createElement("select");c.o.forEach(function(x){i.appendChild(el("option",null,x))});i.value=v;i.setAttribute("aria-label",c.l);i.onchange=function(){S.v[c.i]=i.value;save();msg(c.l+": "+i.value+".");upd()};r.appendChild(i)}
+else{i=document.createElement("input");i.type=c.t=="n"?"number":"text";i.value=v;i.setAttribute("aria-label",c.l);if(c.t=="n"){i.step=1;i.className="num"}i.onchange=function(){S.v[c.i]=c.t=="n"?Math.round(Number(i.value)||0):i.value.trim();i.value=S.v[c.i];save();msg(c.l+" updated.");upd()};r.appendChild(i)}
+return r}
+function rows(p,l){l.forEach(function(c){p.appendChild(row(c))})}
+function head(p,h,s){p.appendChild(el("h2",null,h));p.appendChild(el("p","sub",s))}
+function blk(p,t,n,x){var r=el("div","row"),d=el("div");d.appendChild(el("strong",null,t));d.appendChild(el("p",null,x));r.appendChild(d);r.appendChild(el("span","val",n));p.appendChild(r)}
+function tone(side,name){try{var A=window.AudioContext||window.webkitAudioContext,ctx=tone.c||(tone.c=new A()),o=ctx.createOscillator(),g=ctx.createGain(),v=S.v,t=ctx.currentTime;o.frequency.value=520;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(Math.max(.02,v.vol/100*.25),t+.03);g.gain.exponentialRampToValueAtTime(.0001,t+.45);o.connect(g);if(ctx.createStereoPanner){var pn=ctx.createStereoPanner();pn.pan.value=v.dir?side*v.pan/100:0;g.connect(pn);pn.connect(ctx.destination)}else{g.connect(ctx.destination)}o.start();o.stop(t+.5);S.tested=true;save();msg("Tone played "+name.toLowerCase()+(v.dir?".":", directional audio off."))}catch(e){msg("Audio unavailable on this device.")}}
+function upd(){var b=$("brg");if(b){var v=S.v,dx=v.bx-v.px,dz=v.bz-v.pz;if(!(v.bx||v.by||v.bz)){b.textContent="Bed not set. Add its position in Respawn."}else{var a=(Math.atan2(dx,-dz)*180/Math.PI+360)%360,n=["north","north-east","east","south-east","south","south-west","west","north-west"][Math.round(a/45)%8];b.textContent=Math.round(Math.hypot(dx,dz))+" blocks, "+n+", bearing "+Math.round(a)+"°";$("ndl").style.transform="rotate("+a+"deg)"}}
+var c=$("bcoord");if(c){c.textContent="X "+fmt(S.v.bx)+"   Y "+fmt(S.v.by)+"   Z "+fmt(S.v.bz);$("bdim").textContent=S.v.dim}}
+function dth(){var d=S.death;$("dth").textContent=d?"Last death: X "+fmt(d.x)+"   Y "+fmt(d.y)+"   Z "+fmt(d.z)+", "+d.t:"No deaths logged."}
+var V={
+cfg:function(p){head(p,"Configuration","Her personal gameplay settings. They apply to Echo only.");rows(p,C.cfg)},
+per:function(p){head(p,"Perception","Audio and navigation aids for playing without sight.");rows(p,C.per);
+var t=el("div","row"),d=el("div"),g=el("div","btns");d.appendChild(el("strong",null,"Test directional audio"));d.appendChild(el("p",null,"Plays a short tone from one side. Use headphones."));[["Left",-1],["Center",0],["Right",1]].forEach(function(a){var b=el("button","btn",a[0]);b.onclick=function(){tone(a[1],a[0])};g.appendChild(b)});t.appendChild(d);t.appendChild(g);p.appendChild(t);
+p.appendChild(el("h3",null,"Navigation"));rows(p,C.pos);var b=el("div","bear");b.innerHTML='<svg viewBox="0 0 96 96" width="96" height="96" aria-hidden="true"><circle cx="48" cy="48" r="44" fill="none" stroke="rgba(255,255,255,.35)"/><text x="48" y="15" text-anchor="middle" fill="#8d96a6" font-size="9" font-family="monospace">N</text><g id="ndl" style="transform-origin:48px 48px;transition:transform .5s"><line x1="48" y1="48" x2="48" y2="22" stroke="#fff" stroke-width="1.5"/><circle cx="48" cy="20" r="3" fill="#9fd8ff"/></g><circle cx="48" cy="48" r="2" fill="#fff"/></svg><div><strong>Bed bearing</strong><p id="brg" class="mono"></p></div>';p.appendChild(b)},
+abl:function(p){head(p,"Abilities","Gameplay mechanics Echo permits for herself. Her own settings only.");rows(p,C.abl)},
+res:function(p){head(p,"Respawn","Her designated bed. If she dies, she wakes here.");var c=el("div","bed");c.innerHTML='<div id="bcoord" class="big"></div><div id="bdim" class="mute"></div>';p.appendChild(c);rows(p,C.res);
+var r=el("div","row"),g=el("div","btns"),b1=el("button","btn","Check bed"),b2=el("button","btn","Log death here");
+b1.onclick=function(){var v=S.v;if(!(v.bx||v.by||v.bz)){msg("No bed set. Enter its position first.");return}S.bedChk=true;save();msg("Bed registered in "+v.dim+".")};
+b2.onclick=function(){var v=S.v;S.death={x:v.px,y:v.py,z:v.pz,t:new Date().toLocaleString()};save();msg("Death logged at current position.");dth()};
+g.appendChild(b1);g.appendChild(b2);r.appendChild(g);p.appendChild(r);var m=el("p","mono");m.id="dth";p.appendChild(m);dth()},
+idn:function(p){head(p,"Identity","Account holder: Avery Echo. Her signature skin and personal visuals.");var w=el("div","skin"),c=document.createElement("canvas");c.width=8;c.height=8;c.style.width=c.style.height="96px";c.setAttribute("role","img");c.setAttribute("aria-label","Skin head preview");var x=c.getContext("2d"),pal={S:"#c9ced8",H:"#e6eaf1",K:"#f0d3bd",W:"#ffffff",D:"#b98a7a"};
+["SSSSSSSS","SHSSSSHS","SSKKKKSS","SKKKKKKS","SWWKKWWS","SKKKKKKS","SKKDDKKS","SSKKKKSS"].forEach(function(r,y){for(var i=0;i<8;i++){x.fillStyle=pal[r[i]];x.fillRect(i,y,1,1)}});
+var d=el("div");d.appendChild(el("strong",null,"Signature skin"));d.appendChild(el("p","mono","Silver hair, solid white eyes."));w.appendChild(c);w.appendChild(d);p.appendChild(w);rows(p,C.idn)},
+sys:function(p){head(p,"System status","Active settings, errors and saved configurations.");
+var on=[];ALL.forEach(function(c){if(c.t=="s"&&S.v[c.i])on.push(c.l)});blk(p,"Active settings",on.length+" on",on.join(", ")||"None.");
+var er=[];if(!S.tested)er.push("Directional audio not tested.");if(!(S.v.bx||S.v.by||S.v.bz))er.push("Bed position not set.");else if(!S.bedChk)er.push("Bed not checked.");blk(p,"Errors",er.length?er.length+" found":"None",er.join(" ")||"No errors.");
+p.appendChild(el("h3",null,"Saved configurations"));var a=el("div","row"),ip=document.createElement("input"),sv=el("button","btn","Save current");ip.type="text";ip.placeholder="Configuration name";ip.setAttribute("aria-label","Configuration name");
+sv.onclick=function(){var n=ip.value.trim();if(!n){msg("Name the configuration first.");return}if(S.presets.length>=6){msg("Limit reached. Delete one first.");return}S.presets.push({n:n,v:JSON.parse(JSON.stringify(S.v))});save();msg("Saved "+n+".");render("sys",false)};a.appendChild(ip);a.appendChild(sv);p.appendChild(a);
+S.presets.forEach(function(z,k){var r=el("div","row"),g=el("div","btns"),l=el("button","btn","Load"),x=el("button","btn","Delete");r.appendChild(el("strong",null,z.n));
+l.onclick=function(){for(var i in z.v)if(i in S.v)S.v[i]=z.v[i];save();msg("Loaded "+z.n+".");render("sys",false)};x.onclick=function(){S.presets.splice(k,1);save();msg("Deleted "+z.n+".");render("sys",false)};g.appendChild(l);g.appendChild(x);r.appendChild(g);p.appendChild(r)});
+p.appendChild(el("h3",null,"Recent messages"));p.appendChild(el("div","logb mono",log.length?log.join("\n"):"No messages yet."));
+p.appendChild(el("p","sub","Utility only. It changes Echo’s own settings and nothing else, not the world and not other players."))}};
+function render(t,anim){var p=$("panel");p.innerHTML="";V[t](p);upd();document.querySelectorAll("#nav button").forEach(function(b){b.setAttribute("aria-selected",b.dataset.t==t)});if(anim!==false){p.classList.remove("unf");void p.offsetWidth;p.classList.add("unf")}}
+T.forEach(function(t,i){var b=el("button");b.dataset.t=t[0];b.setAttribute("role","tab");b.appendChild(el("span","n","0"+(i+1)));b.appendChild(document.createElement("br"));b.appendChild(document.createTextNode(t[1]));b.onclick=function(){render(t[0]);msg(t[1]+" opened.")};$("nav").appendChild(b)});
+var ui=$("ui"),scene=$("scene");
+function openUI(){scene.classList.add("open");ui.hidden=false;ui.className="ui opening";render("cfg",false);msg("Session active.");setTimeout(function(){ui.classList.remove("opening")},2300);$("nav").firstChild.focus({preventScroll:true})}
+function closeUI(){if(ui.classList.contains("closing"))return;ui.className="ui closing";setTimeout(function(){ui.hidden=true;ui.className="ui";scene.classList.remove("open");$("con").focus({preventScroll:true})},1000)}
+$("con").onclick=openUI;$("cl").onclick=closeUI;
+document.addEventListener("keydown",function(e){if(e.key=="Escape"&&!ui.hidden)closeUI()});
 </script>
 </body>
 </html>
